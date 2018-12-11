@@ -25,6 +25,21 @@ $app->get('/admin', function() {
 
 });
 
+$app->get('/Admin/Login', function() {
+    
+	$page = new PageAdmin(["header"=>false,"footer"=>false]
+	);
+	$page->setTpl("login");
+
+});
+$app->post("/admin/login",function(){
+	
+	User::login($_POST["login"],$_POST["password"]);
+	header("Location:/admin");
+	exit;
+
+})
+
 
 $app->run();
 
