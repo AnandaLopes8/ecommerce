@@ -25,11 +25,11 @@ $app->get('/admin', function() {
 	$page = new PageAdmin();
 	$page->setTpl("index");
 
+
 });
 
 $app->get('/admin/login', function() {
-	$page = new PageAdmin(["header"=>false,"footer"=>false]
-	);
+	$page = new PageAdmin(["header"=>false,"footer"=>false]);
 	$page->setTpl("login");
 
 });
@@ -47,10 +47,12 @@ $app->get('/admin/logout', function() {
 	exit;
 });
 
-$app->get("/admin/users", function(){
-	User::verifyLogin();
+$app->get('/admin/users', function() {
+    
+    User::verifyLogin();
 	$page = new PageAdmin();
 	$page->setTpl("users");
+
 });
 
 $app->get("/admin/users/create", function(){
