@@ -6,6 +6,7 @@ use \Slim\Slim;
 
 use \Hcode\Page;
 use \Hcode\PageAdmin;
+use \Hcode\Model;
 
 $app = new Slim();
 
@@ -38,7 +39,7 @@ $app->post("/admin/login",function(){
 	header("Location:/admin");
 	exit;
 
-})
+});
 
 
 $app->run();
