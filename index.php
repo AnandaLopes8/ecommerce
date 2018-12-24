@@ -43,14 +43,11 @@ $app->get('/admin/users', function() {
 		"users"=>$users
 	));
 });
-
-
 $app->get("/admin/users/create", function(){
 	User::verifyLogin();
 	$page = new PageAdmin();
 	$page->setTpl("users-create");
 });
-
 $app->get("/admin/users/:iduser/delete",function($iduser){
 	User::verifyLogin();
 	$user = new User();
@@ -59,9 +56,7 @@ $app->get("/admin/users/:iduser/delete",function($iduser){
 	$user->delete();
 	header("Location: /admin/users");
 	exit;
-
 });
-
 $app->get("/admin/users/:iduser", function($iduser){
 	User::verifyLogin();
 	$user = new User();
@@ -71,58 +66,41 @@ $app->get("/admin/users/:iduser", function($iduser){
         "user"=>$user->getValues()
     ));
 });
-
 $app->post("/admin/users/create",function(){
 	User::verifyLogin();
 	$user = new User();
 	$_POST["inadmin"]=(isset($_POST["inadmin"]))?1:0;
 	$user->setData($_POST);
 	$user->save();
-
 	header("Location: /admin/users");
 	exit;
-
-
 });
-
 $app->post("/admin/users/:iduser",function($iduser){
 	User::verifyLogin();
 	$user = new User();
-
 	$_POST["inadmin"]=(isset($_POST["inadmin"]))?1:0;
-
 	$user->get((int)$iduser);
 	$user->setData($_POST);
 	$user->update();
 	header("Location: /admin/users");
 	exit;
-
 });
-
 $app->get("/admin/forgot",function(){
 	$page = new PageAdmin(["header"=>false,"footer"=>false]);
 	$page->setTpl("forgot");
-
 });
-
 $app->post("/admin/forgot", function(){
 	
 	$result = User::getForgot($_POST["email"]);
-
 	header("Location: /admin/forgot/sent");
 	exit;
 });
-
 $app->get("/admin/sent",function(){
 	$page = new PageAdmin([
 		"header"=>false,
 		"footer"=>false
 	]);
 	$page->setTpl("forgot-sent");
-
 });
-
-
-
 $app->run();
  ?>
