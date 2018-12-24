@@ -19,7 +19,9 @@ $app->get('/admin', function() {
 	$page->setTpl("index");
 });
 $app->get('/admin/login', function() {
-	$page = new PageAdmin(["header"=>false,"footer"=>false]);
+	$page = new PageAdmin([
+		"header"=>false,
+		"footer"=>false]);
 	$page->setTpl("login");
 });
 $app->post('/admin/login', function() {
@@ -34,7 +36,7 @@ $app->get('/admin/logout', function() {
 });
 $app->get('/admin/users', function() {
     
-//    User::verifyLogin();
+    User::verifyLogin();
     $users = User::listAll();
 	$page = new PageAdmin();
 	$page->setTpl("users", array(
@@ -44,7 +46,7 @@ $app->get('/admin/users', function() {
 
 
 $app->get("/admin/users/create", function(){
-//	User::verifyLogin();
+	User::verifyLogin();
 	$page = new PageAdmin();
 	$page->setTpl("users-create");
 });
@@ -112,7 +114,10 @@ $app->post("/admin/forgot", function(){
 });
 
 $app->get("/admin/sent",function(){
-	$page = new PageAdmin(["header"=>false,"footer"=>false]);
+	$page = new PageAdmin([
+		"header"=>false,
+		"footer"=>false
+	]);
 	$page->setTpl("forgot-sent");
 
 });

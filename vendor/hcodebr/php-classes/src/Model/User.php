@@ -21,6 +21,8 @@ class User extends Model{
 		}
 		$data = $results[0];
 
+		var_dump(password_verify($password,$data["despassword"]));
+
 		if(password_verify($password,$data["despassword"])===true){
 
 			$user = new User();
@@ -121,33 +123,33 @@ class User extends Model{
 
 		$sql = new Sql();
 
-		$results = $sql->select("SELECT * FROM tb_persons INNER JOIN tb_usersb USING (idperson) WHERE a.desemail = :email", array(
+		$results = $sql->select("SELECT * FROM tb_persons a INNER JOIN tb_users b USING (idperson) WHERE a.desemail = :email", array(
 			":email"=>$email
 		));
 
 		if(count($results)===0){
-			throw new Exception("Não foi possivel encontrar o email");
+			throw new \Exception("Não foi possivel encontrar o email 1");
 			
 		}else{
-			$DATA = $results[0];
+			$data = $results[0];
 
-			$results2 = $sql->select("CALL sp_userpasswordsrecoveries_create(:iduser, :desip", array(
-				"iduser"=>$date["iduser"],
-				"desip"=>$_SERVER["REMOTE_ADDR"]
-			));
+			$results2 = $sql->select("CALL sp_userspasswordsrecoveries_create (:iduser, :desip", array("iduser"=>$data["iduser"],"desip"=>$_SERVER["REMOTE_ADDR"]));
+
+			echo "<br>";
+			var_dump($results2);
 			if(count($results2)===0){
-				throw new Exception("Não foi possivel encontrar o email");
+				throw new \Exception("Não foi possivel encontrar o email 2 ");
 				
 			}else{
 				$dataRecovery = $results2[0];
-				$code = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB));
+				$code = base64_encode(openssl_encrypt(MCRYPT_RIJNDAEL_128, User::SECRET, $dataRecovery["idrecovery"], MCRYPT_MODE_ECB));
 				$link = "http://www.ecommerce.com.br/admin/forgot/reset?cod=$code";
 
-				$malier = new Mailer($data["desemail"],$data["desperson"],"redefinir senha Projeto","forgot",array(
+				$mailer = new Mailer($data["desemail"],$data["desperson"],"redefinir senha Projeto","forgot",array(
 					'name' => $data["desperson"],
 					"link=>"=> $link
 				));
-				$malier->send();
+				$mailer->send();
 				return $data;
 
 			}

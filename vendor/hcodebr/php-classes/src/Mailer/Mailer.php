@@ -4,29 +4,32 @@ namespace Hcode;
 
 use Rain\Tpl;
 
-class Malier{
+class Mailer{
 	const USERNAME = "ananda.lopes.8@gmail.com";
-	const PASSWORD = "amoobjja@8";
+	const PASSWORD = "senha";
 	const NAME_FROM ="Hcode loja"
 
 	private  $mail;
 
-	public function __construct ($toAddress, $toName,$subject,$tplName,$data = arry()){
+	public function __construct ($toAddress, $toName,$subject,$tplName,$data = array()){
 
 		$config = array(
-		    "tpl_dir"=> $_SERVER["DOCUMENT_ROOT"]."/views/email/",
+		   "tpl_dir"=> $_SERVER["DOCUMENT_ROOT"]."/views/email/",
 		   "cache_dir"=>$_SERVER["DOCUMENT_ROOT"]."/views-cache",
 		   "debug"=>false
 		);
+		
 		Tpl::configure( $config );
 
 		$tpl = new Tpl;
 
-		 foreach ($data as $key => $value) {
+		foreach ($data as $key => $value) {
 		 	$tpl->assing($key,$value);
 
-		 }
-		 $html = $tpl->draw($tplName,true);
+		}
+
+		$html = $tpl->draw($tplName,true);
+		
 		$this->mail = new \PHPMailer;
 
 		//Tell PHPMailer to use SMTP
