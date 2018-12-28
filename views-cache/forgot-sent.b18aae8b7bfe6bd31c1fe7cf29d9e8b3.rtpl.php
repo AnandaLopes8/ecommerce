@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -26,33 +26,19 @@
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
-   <a href="/admin">Projeto<b>Onco</b></a>
+    <a href="/admin">Projeto<b>Onco</b></a>
   </div>
-  
-   <div class="help-block text-center">
-     Olá {$name}, digite uma nova senha:
-    </div>
 
-  <!-- START LOCK SCREEN ITEM -->
-  <div class="lockscreen-item">
-
- 
-    <form  action="/admin/forgot/reset" method="post">
-      <input type="hidden" name="code" value="{$code}">
-      <div class="input-group">
-        <input type="password" class="form-control" placeholder="Digite a nova senha" name="password">
-        <div class="input-group-btn">
-          <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
-        </div>
-      </div>
-    </form>
-   
-
-  </div>
   <!-- /.lockscreen-item -->
-  
+  <div class="help-block text-center">
+    <div class="callout callout-success">
+      <h4>E-mail enviado!</h4>
+
+      <p>Verifique as instruções no seu e-mail.</p>
+    </div>
+  </div>
   <div class="lockscreen-footer text-center">
-   Projetado por: <b>Ananda Lopes</b> e <b>Leonardo Nunes.</b><br>
+    Projetado por: <b>Ananda Lopes</b> e <b>Leonardo Nunes</b><br>
   </div>
 </div>
 <!-- /.center -->

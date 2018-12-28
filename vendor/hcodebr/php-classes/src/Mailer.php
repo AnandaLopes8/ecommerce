@@ -6,8 +6,8 @@ use Rain\Tpl;
 
 class Mailer{
 	const USERNAME = "ananda.lopes.8@gmail.com";
-	const PASSWORD = "senha";
-	const NAME_FROM ="Hcode loja"
+	const PASSWORD = "amoobjja@8";
+	const NAME_FROM ="Hcode loja";
 
 	private  $mail;
 
@@ -24,8 +24,7 @@ class Mailer{
 		$tpl = new Tpl;
 
 		foreach ($data as $key => $value) {
-		 	$tpl->assing($key,$value);
-
+		 	$tpl->assign($key,$value);
 		}
 
 		$html = $tpl->draw($tplName,true);
@@ -33,7 +32,7 @@ class Mailer{
 		$this->mail = new \PHPMailer;
 
 		//Tell PHPMailer to use SMTP
-		$this->isSMTP();
+		$this->mail->isSMTP();
 
 		//Enable SMTP debugging
 		// 0 = off (for production use)
@@ -76,7 +75,7 @@ class Mailer{
 
 		//Read an HTML message body from an external file, convert referenced images to embedded,
 		//convert HTML into a basic plain-text alternative body
-		$this->mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+		$this->mail->msgHTML($html);
 
 		//Replace the plain text body with one created manually
 		$this->mail->AltBody = 'testeeeeeeeeeeeeeee';
