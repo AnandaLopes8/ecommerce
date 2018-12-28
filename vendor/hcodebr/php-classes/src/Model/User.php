@@ -176,7 +176,7 @@ class User extends Model{
 	        a.dtrecovery IS NULL
 	        AND
 	        DATE_ADD(a.dtregister, INTERVAL 1 HOUR) >= NOW();
-	    ", array(
+	    	", array(
 	        ":idrecovery"=>$idrecovery
 	    ));
 	    if (count($results) === 0){
@@ -188,6 +188,18 @@ class User extends Model{
 	
 
 	public static function setForgotUsed($idrecovery){
+		$sql = new Sql();
+		$sql->query("UPDATE tb_userspasswordsrecoveries SET strecovery = NOW() WHERE idrecovery = :idrecovery", array(
+		 	":idrecovery"=>$idrecovery
+		));
+	}
+
+	public function setPassword($password){
+		$sql = new Sql();
+		$sql->query("UPDATE tb_users SET despassword = :password WHERE iduser =:iduser", array(
+		 	":password"=>$password,
+		 	":iduser"=>$this->getiduser()
+		));
 
 	}
 

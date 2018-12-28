@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="lockscreen-footer text-center">
-    Projetado por: <b>Ananda Lopes</b> e <b>Leonardo Nunes</b><br>
+    Projetado por: <b>Ananda Lopes</b> e <b>Leonardo Nunes.</b><br>
   </div>
 </div>
 <!-- /.center -->

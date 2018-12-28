@@ -122,11 +122,22 @@ $app->get("/admin/forgot/reset",function(){
 });
 
 $app->post("/admin/forgot/reset",function(){
-	$user =  User::validForgotDecrypt($_POST["code"]);
+	$forgot =  User::validForgotDecrypt($_POST["code"]);
 
-	User::setForgotUsed($user["idrecovery"]);
+	User::setForgotUsed($forgot["idrecovery"]);
+
+	$user = new User();
+	$user->get((int)$forgot["iduser"]);
+	$user->setPassword($_POST["password"]);
+
+	$page = new PageAdmin([
+		"header"=>false,
+		"footer"=>false
+	]);
+	$page->setTpl("forgot-reset-success");
 
 });
+
 
 $app->run();
  ?>
