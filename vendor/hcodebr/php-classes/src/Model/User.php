@@ -21,9 +21,6 @@ class User extends Model{
 			
 		}
 		$data = $results[0];
-
-		var_dump(password_verify($password,$data["despassword"]));
-
 		if(password_verify($password,$data["despassword"])===true){
 
 			$user = new User();

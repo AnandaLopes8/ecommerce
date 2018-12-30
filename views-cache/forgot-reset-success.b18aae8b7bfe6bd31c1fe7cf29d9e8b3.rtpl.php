@@ -29,28 +29,12 @@
     <a href="/admin">Projeto<b>Onco</b></a>
   </div>
 
-  <!-- START LOCK SCREEN ITEM -->
-  <div class="lockscreen-item">
-
-    <!-- lockscreen credentials (contains the form) -->
-    <form  action="/admin/forgot" method="post">
-      <div class="input-group">
-        <input type="email" class="form-control" placeholder="Digite o e-mail" name="email">
-
-        <div class="input-group-btn">
-          <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
-        </div>
-      </div>
-    </form>
-    <!-- /.lockscreen credentials -->
-
-  </div>
   <!-- /.lockscreen-item -->
   <div class="help-block text-center">
-    Digite seu e-mail e receba as instruções para redefinir a sua senha.
-  </div>
-  <div class="text-center">
-    <a href="/admin/login">OU entre com usuário diferente.</a>
+    <div class="callout callout-success">
+      <h4>Senha Alterada!</h4>
+      <p>Tente fazer o login com sua nova senha.<br><a href="/admin/login">Clique aqui</a> para fazer o login.</p>
+    </div>
   </div>
   <div class="lockscreen-footer text-center">
     Projetado por: <b>Ananda Lopes</b> e <b>Leonardo Nunes.</b><br>
