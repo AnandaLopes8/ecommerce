@@ -23,6 +23,7 @@ class Category extends Model{
 			":descategory"=>$this->getdescategory()
 		));
 		$this->setData($results[0]);
+		Category::updatefile();
 	}
 
 
@@ -44,5 +45,18 @@ class Category extends Model{
 		$sql = new Sql();
 
 		$results = $sql->query("DELETE FROM tb_categories WHERE idcategory = :idcategory;", array(":idcategory" => $this->getidcategory()));
+
+		Category::updatefile();
+	}
+
+	public static function updatefile(){
+
+		$Category = Category::listAll();
+		$html= [];
+
+		foreach ($Category as $row) {
+			array_push($html,'<li><a href=/categories/'.$row['idcategory'].'>'.$row['descategory'].'</a></li>');
+		}
+		file_put_contents($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR."views".DIRECTORY_SEPARATOR."categories-menu.html", implode('', $html));
 	}
 }?>
