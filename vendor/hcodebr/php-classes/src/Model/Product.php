@@ -9,6 +9,14 @@ class Product extends Model{
 		return $sql->select("SELECT * FROM tb_products ORDER BY desproduct");
 	}
 	
+	public static function checkList($list){
+		foreach ($list as &$row) {
+			$p = new Product();
+			$p->setData($row);
+			$row = $p->getValues();
+		}
+	}
+
 	public function save (){
 		$sql = new Sql();
 		$results = $sql->select("CALL sp_products_save(:idproduct, :desproduct,
@@ -89,6 +97,8 @@ class Product extends Model{
 		
 		$this->checkPhoto();
 	}
+
+	
 
 }
 ?>
